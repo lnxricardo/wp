@@ -1,0 +1,16 @@
+body{
+	background-color: #FFFF00;
+}
+
+.main_menu {
+	background-color: #fff;
+}
+.main_menu ul,
+.main_menu li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+.main_menu li{
+	display: inline;
+}

@@ -1,30 +1,60 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<?php wp_head(); ?>
-		<title></title>
-	</head>
-	<body>
-		<h1>Meu primeiro tema</h1>
+<?php get_header(); ?>
 
-		<?php 
-			if( has_nav_menu('primary')){ //show menu;
-				wp_nav_menu(array(
+<section>
+	<div class="container">
 
-					'theme_location' => 'primary', //Here is a location of menu;
-					'container' => 'nav', //here is a semantic tag of HTML;
-					'container_class' => 'main_menu',
-					'fallback_cb' => false //if set up true thi's will generate a pattern menu;
+		<?php if( have_posts() ): ?>
+			<?php while(have_posts()): ?>
 
-				));
-			}
+				<?php the_post(); ?>
 
-		 ?>
+				<article>
+					<?php if(has_post_thumbnail()): ?>
+						<a href="<?php the_permalink(); ?>">
+							<?php the_post_thumbnail('full', array(
+								'class' => 'post_mini'
+							)); ?>
+						</a>
+
+					<?php endif; ?>
+
+					<h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+
+					<p>
+						<?php echo get_the_date(); ?> |
+						<a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>"><?php the_author(); ?></a> | 
+
+						<?php the_category(',') ?>
+						
+					</p> 
+
+					<p>
+						<?php the_excerpt(); ?>
+
+					</p>
+
+					<p>
+						<?php comments_number('nenhum comentário', 'tem um comentário', '% comentários') ?>  | 
+						<a href="<?php the_permalink(); ?>">Leia mais...</a>
+					</p>
+
+				</article>
+
+			<?php endwhile; ?>
+
+		<?php endif; ?>
+	
+	</div>
+
+	<?php get_sidebar(); ?>
+	
+	<div style="clear:both"></div>
+</section>
+
+<?php get_footer(); ?>
 
 
-		<?php wp_footer(); ?>
 
-	</body>
-</html>
+
 
 
